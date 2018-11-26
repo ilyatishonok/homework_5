@@ -1,4 +1,4 @@
-class CroppedImage {
+export default class CroppedImage {
     constructor() {
         this.element = document.createElement('img');
     }

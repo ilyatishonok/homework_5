@@ -1,5 +1,5 @@
-import Canvas from './Canvas';
-import CropCircle from './CropCircle';
+import Canvas from './Canvas.js';
+import CropCircle from './CropCircle.js';
 
 export default class CropCanvas extends Canvas {
     constructor() {

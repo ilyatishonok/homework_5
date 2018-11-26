@@ -1,5 +1,5 @@
-import Cropper from './components/Cropper';
-import FileUploader from './components/FileUploader';
+import Cropper from './components/Cropper.js';
+import FileUploader from './components/FileUploader.js';
 
 export default class App {
     init() {

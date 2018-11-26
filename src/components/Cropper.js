@@ -1,6 +1,6 @@
-import CropCanvas from './canvas/CropCanvas';
-import CroppedImage from './CroppedImage';
-import CropResizer from './CropResizer';
+import CropCanvas from './canvas/CropCanvas.js';
+import CroppedImage from './CroppedImage.js';
+import CropResizer from './CropResizer.js';
 
 export default class Cropper {
     constructor(container) {
@@ -43,6 +43,7 @@ export default class Cropper {
 
     show() {
         this.container.style.display = 'block';
+
     }
 
     hide() {

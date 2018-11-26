@@ -1,4 +1,4 @@
-class Canvas {
+export default class Canvas {
     constructor() {
         this.element = document.createElement('canvas');
         this.ctx = element.getContext('2d');
