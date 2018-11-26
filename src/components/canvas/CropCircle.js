@@ -1,3 +1,5 @@
+import Shape from './Shape';
+
 export default class CropCircle extends Shape {
     constructor(x, y, radius) {
         super(x, y);
