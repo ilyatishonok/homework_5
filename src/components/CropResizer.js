@@ -5,4 +5,9 @@ export default class CropResizer {
 
         this.element.addEventListener('change', onChange);
     }
+
+    setRanges(min, max) {
+        this.element.max = max;
+        this.element.min = min;
+    }
 }

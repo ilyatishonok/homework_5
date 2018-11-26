@@ -11,25 +11,21 @@ export default class Cropper {
         this.croppedImageElement = croppedImage.getElement();
         this.canvas = new CropCanvas(this.croppedImage);
 
+        this.onCropResizerChange = this.onCropResizerChange.bind(this);
+
+        this.cropResizer = new CropResizer(this.onCropResizerChange);
+
         this._init();
     }
 
     _init() {
-        const { container, canvas, cropCircleSizeChangeInput, _initListeners } = this; 
+        const { container, canvas, cropResizer, croppedImage } = this; 
 
         container.style.display = 'none';
-        container.appendChild(canvas);
-        container.appendChild(radiusChangeInput);
-        cropCircleSizeChangeInput.type = 'range';
 
-        _initListeners();
-    }
-
-    _initListeners() {
-        cropCircleSizeChangeInput.addEventListener('change', event => {
-            cropCircle.resize(event.target.value);
-            draw();
-        });
+        container.appendChild(canvas.element);
+        container.appendChild(croppedImage);
+        container.appendChild(cropResizer.element);
     }
 
     onImageLoad(image) {
@@ -37,8 +33,13 @@ export default class Cropper {
 
         canvas.setSize(image.naturalWidth, image.naturalHeight);
 
+        this.cropResizer.setRanges(5, canvas.width/1.5);
         canvas.move(canvas.width / 2, canvas.height / 2);
         canvas.setImage(image);
+    }
+
+    onCropResizerChange(event) {
+        this.canvas.resizeCropArea(event.target.value);
     }
 
     show() {
