@@ -1,0 +1,25 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.layout {
+    height: 100%;
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+.image-preview {
+    display: none;
+}
+
+.image-uploader {
+    border-radius: 10px;
+    border: 1px solid black;
+    box-shadow: 0 0 10px black;
+    padding: 40px;
+    margin: auto;
+}
