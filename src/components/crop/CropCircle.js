@@ -1,7 +1,7 @@
-import Shape from './Shape.js';
+import Shape from '../canvas/shapes/Shape.js';
 
 export default class CropCircle extends Shape {
-    constructor(x, y, radius) {
+    constructor(x, y, radius = 75) {
         super(x, y);
         
         this.radius = radius;
@@ -11,6 +11,7 @@ export default class CropCircle extends Shape {
 
     draw(ctx) {
         ctx.beginPath();
+        ctx.setLineDash([5, 10]);
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.stroke();
     }

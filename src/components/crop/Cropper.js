@@ -1,4 +1,4 @@
-import CropCanvas from '../canvas/CropCanvas.js';
+import CropCanvas from './CropCanvas.js';
 import CroppedImage from './CroppedImage.js';
 import CropResizer from './CropResizer.js';
 
@@ -20,21 +20,15 @@ export default class Cropper {
 
         container.style.display = 'none';
 
-        const croppedImageDOMElement = croppedImage.getDOMElement();
-
         container.appendChild(canvas.getDOMElement());
         container.appendChild(croppedImage.getDOMElement());
     }
 
     onImageLoad(image) {
-        const { canvas } = this;
+        const { canvas, cropResizer } = this;
 
-        canvas.setSizes(image.width, image.height);
-
-        this.cropResizer.setRanges(1, Math.min(canvas.element.height / 2, canvas.element.width / 2));
-        
+        cropResizer.setRanges(1, 75);
         canvas.setImage(image);
-        canvas.moveCropArea(canvas.element.width / 2, canvas.element.height / 2);
     }
 
     onCropResizerChange(event) {

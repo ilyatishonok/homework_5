@@ -1,14 +1,13 @@
-import Canvas from './Canvas.js';
+import Canvas from '../canvas/Canvas.js';
 import CropCircle from './CropCircle.js';
 
 export default class CropCanvas extends Canvas {
-    constructor(croppedImage) {
-        super();
-
+    constructor(croppedImage, width, height) {
+        super(width, height);
+        
         this.cropCircle = new CropCircle(
             this.element.width / 2,
             this.element.height / 2, 
-            0
         );
 
         this.image = null;
@@ -18,7 +17,7 @@ export default class CropCanvas extends Canvas {
 
     draw() {
         this.ctx.clearRect(0, 0, this.element.width, this.element.height);
-        this.ctx.drawImage(this.image, 0, 0);
+        this.ctx.drawImage(this.image, 0, 0, this.element.width, this.element.height);
         this.cropCircle.draw(this.ctx);
     }
 
@@ -68,7 +67,7 @@ export default class CropCanvas extends Canvas {
     setImage(image) {
         this.image = image;
         
-        this.resizeCropArea(Math.min(image.height / 4, image.width / 4));
+        this.moveCropArea(this.element.width / 2, this.element.height / 2);
         this.updateCroppedImage();
         this.draw();
     }
@@ -76,8 +75,5 @@ export default class CropCanvas extends Canvas {
     setSizes(width, height) {
         this.element.width = width;
         this.element.height = height;
-    }
-
-    _isMovingAllowed(event) {
     }
 }

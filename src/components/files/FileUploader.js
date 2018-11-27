@@ -14,7 +14,6 @@ export default class FileUploader {
     onImageLoad() {
         const newImage = new Image();
         newImage.src = this.fileReader.result;
-        this.fileInput.style.display = 'none';
 
         newImage.onload = this.cropper.onImageLoad.bind(this.cropper, newImage);
         this.cropper.show();
