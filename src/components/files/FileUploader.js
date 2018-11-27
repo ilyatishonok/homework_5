@@ -12,7 +12,7 @@ export default class FileUploader {
     }
 
     onImageLoad() {
-        const newImage = new Image(60, 45);
+        const newImage = new Image();
         newImage.src = this.fileReader.result;
         this.fileInput.style.display = 'none';
 

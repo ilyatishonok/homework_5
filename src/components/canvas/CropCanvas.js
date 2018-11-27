@@ -2,20 +2,18 @@ import Canvas from './Canvas.js';
 import CropCircle from './CropCircle.js';
 
 export default class CropCanvas extends Canvas {
-    constructor() {
+    constructor(croppedImage) {
         super();
-
-        const INITIAL_CROP_CIRCLE_SIZE = 20;
 
         this.cropCircle = new CropCircle(
             this.element.width / 2,
             this.element.height / 2, 
-            INITIAL_CROP_CIRCLE_SIZE
+            0
         );
 
         this.image = null;
         this.isCropCircleMoving = false;
-        this.croppedImage = this.croppedImage;
+        this.croppedImage = croppedImage;
     }
 
     draw() {
@@ -28,6 +26,7 @@ export default class CropCanvas extends Canvas {
         if (this.isCropCircleMoving) {
             this.cropCircle.move(event.offsetX, event.offsetY);
 
+            this.draw();
             this.updateCroppedImage();
         }
     }
@@ -38,6 +37,7 @@ export default class CropCanvas extends Canvas {
 
     onMouseDown(event) {
         if (this.cropCircle.isUnderPointer(event.offsetX, event.offsetY)) {
+            this.cropCircle.setMouseDownOffset(event.offsetX, event.offsetY);
             this.isCropCircleMoving = true;
         }
     }
@@ -48,14 +48,14 @@ export default class CropCanvas extends Canvas {
 
     resizeCropArea(size) {
         this.cropCircle.resize(size);
-        this.updateImage();
         this.draw();
+        this.updateCroppedImage();
     }
 
     moveCropArea(x, y) {
         this.cropCircle.move(x, y);
-        this.updateImage()
         this.draw();
+        this.updateCroppedImage();
     }
 
     updateCroppedImage() {
@@ -67,8 +67,17 @@ export default class CropCanvas extends Canvas {
 
     setImage(image) {
         this.image = image;
-       
+        
+        this.resizeCropArea(Math.min(image.height / 4, image.width / 4));
         this.updateCroppedImage();
         this.draw();
+    }
+
+    setSizes(width, height) {
+        this.element.width = width;
+        this.element.height = height;
+    }
+
+    _isMovingAllowed(event) {
     }
 }

@@ -4,13 +4,6 @@ export default class Shape {
         this.y = y;
     }
 
-    getCoords() {
-        return {
-            x,
-            y,
-        };
-    }
-    
     draw() {}
     resize() {}
     move() {}

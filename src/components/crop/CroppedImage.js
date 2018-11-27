@@ -1,5 +1,9 @@
-export default class CroppedImage {
+import Element from '../element/Element.js';
+
+export default class CroppedImage extends Element {
     constructor() {
+        super();
+        
         this.element = document.createElement('img');
     }
 
@@ -12,11 +16,11 @@ export default class CroppedImage {
         const ctx = canvas.getContext('2d');
         ctx.putImageData(imageData, 0, 0);
 
-        context.globalCompositeOperation = 'destination-in';
-        context.beginPath();
-        context.arc(width/2, height/2, height/2 - 1, 0, 2 * Math.PI);
-        context.closePath();
-        context.fill();
+        ctx.globalCompositeOperation = 'destination-in';
+        ctx.beginPath();
+        ctx.arc(width / 2, height / 2, width / 2 - 1, 0, 2 * Math.PI);
+        ctx.closePath();
+        ctx.fill();
 
         this.element.src = canvas.toDataURL();
     }    

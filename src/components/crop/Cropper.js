@@ -1,4 +1,4 @@
-import CropCanvas from './canvas/CropCanvas.js';
+import CropCanvas from '../canvas/CropCanvas.js';
 import CroppedImage from './CroppedImage.js';
 import CropResizer from './CropResizer.js';
 
@@ -6,36 +6,35 @@ export default class Cropper {
     constructor(container) {
         this.container = container;
         
-        const croppedImage = new CroppedImage();
-
-        this.croppedImageElement = croppedImage.getElement();
-        this.canvas = new CropCanvas(this.croppedImage);
-
         this.onCropResizerChange = this.onCropResizerChange.bind(this);
 
+        this.croppedImage = new CroppedImage();
+        this.canvas = new CropCanvas(this.croppedImage);
         this.cropResizer = new CropResizer(this.onCropResizerChange);
 
         this._init();
     }
 
     _init() {
-        const { container, canvas, cropResizer, croppedImage } = this; 
+        const { container, canvas, croppedImage } = this; 
 
         container.style.display = 'none';
 
-        container.appendChild(canvas.element);
-        container.appendChild(croppedImage);
-        container.appendChild(cropResizer.element);
+        const croppedImageDOMElement = croppedImage.getDOMElement();
+
+        container.appendChild(canvas.getDOMElement());
+        container.appendChild(croppedImage.getDOMElement());
     }
 
     onImageLoad(image) {
         const { canvas } = this;
 
-        canvas.setSize(image.naturalWidth, image.naturalHeight);
+        canvas.setSizes(image.width, image.height);
 
-        this.cropResizer.setRanges(5, canvas.width/1.5);
-        canvas.move(canvas.width / 2, canvas.height / 2);
+        this.cropResizer.setRanges(1, Math.min(canvas.element.height / 2, canvas.element.width / 2));
+        
         canvas.setImage(image);
+        canvas.moveCropArea(canvas.element.width / 2, canvas.element.height / 2);
     }
 
     onCropResizerChange(event) {
@@ -44,7 +43,6 @@ export default class Cropper {
 
     show() {
         this.container.style.display = 'block';
-
     }
 
     hide() {

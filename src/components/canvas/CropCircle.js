@@ -5,6 +5,8 @@ export default class CropCircle extends Shape {
         super(x, y);
         
         this.radius = radius;
+        this.offsetX = 0;
+        this.offsetY = 0;
     }
 
     draw(ctx) {
@@ -18,11 +20,16 @@ export default class CropCircle extends Shape {
     }
 
     move(x, y) {
-        this.x = x;
-        this.y = y;
+        this.x = x - this.offsetX;
+        this.y = y - this.offsetY;
     }
 
     isUnderPointer(x, y) {
         return Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2) < Math.pow(this.radius, 2);
+    }
+
+    setMouseDownOffset(offsetX, offsetY) {
+        this.offsetX = offsetX - this.x;
+        this.offsetY = offsetY - this.y;
     }
 }

@@ -23,3 +23,7 @@ html, body {
     padding: 40px;
     margin: auto;
 }
+
+.crop-resizer {
+    display: block;
+}
