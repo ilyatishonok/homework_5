@@ -12,10 +12,6 @@ html, body {
     align-items: center;
 }
 
-.image-preview {
-    display: none;
-}
-
 .image-uploader {
     border-radius: 10px;
     border: 1px solid black;
@@ -32,9 +28,9 @@ html, body {
     position: relative;
     overflow: hidden;
     display: inline-block;
-  }
+}
   
-  .btn {
+.btn {
     border: 2px solid gray;
     color: gray;
     background-color: white;
@@ -43,13 +39,28 @@ html, body {
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-  }
+}
   
-  .upload-btn-wrapper input[type=file] {
+.upload-btn-wrapper input[type=file] {
     font-size: 100px;
     position: absolute;
     left: 0;
     top: 0;
     opacity: 0;
     cursor: pointer;
-  }
+}
+
+.crop-container {
+    display: flex;
+    align-items: center;
+}
+
+.cropped-image-wrapper {
+    margin-left: 10px;
+}
+
+.crop-canvas-wrapper {
+    margin-top: 10px;
+    border: 1px solid black;
+    box-shadow: 0 0 10px black;
+}

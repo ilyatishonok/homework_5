@@ -18,10 +18,20 @@ export default class Cropper {
     _init() {
         const { container, canvas, croppedImage } = this; 
 
+        container.classList.add('crop-container');
+
+        const imageWrapper = document.createElement('div');
+        const canvasWrapper = document.createElement('div');
+        canvasWrapper.classList.add('crop-canvas-wrapper');
+        imageWrapper.classList.add('cropped-image-wrapper');
+
+        imageWrapper.appendChild(croppedImage.getDOMElement());
+        canvasWrapper.appendChild(canvas.getDOMElement());
+
         container.style.display = 'none';
 
-        container.appendChild(canvas.getDOMElement());
-        container.appendChild(croppedImage.getDOMElement());
+        container.appendChild(canvasWrapper);
+        container.appendChild(imageWrapper);
     }
 
     onImageLoad(image) {
@@ -36,7 +46,7 @@ export default class Cropper {
     }
 
     show() {
-        this.container.style.display = 'block';
+        this.container.style.display = '';
     }
 
     hide() {

@@ -4,7 +4,7 @@ import FileUploader from './components/files/FileUploader.js';
 export default class App {
     init() {
         const cropper = new Cropper(
-            document.querySelector('.canvas-container')
+            document.querySelector('.cropper')
         );
 
         new FileUploader(
